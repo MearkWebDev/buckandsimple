@@ -1,30 +1,23 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { Link } from "react-router-dom";
 import { SiteLayout } from "@/components/SiteLayout";
+import { useSeo } from "@/lib/useSeo";
 import heroImg from "@/assets/hero-home.jpg";
 import { projects } from "@/lib/projects";
 
-export const Route = createFileRoute("/")({
-  head: () => ({
-    meta: [
-      { title: "buck&simple. — Northern Beaches Architects | Manly Architects" },
-      {
-        name: "description",
-        content:
-          "buck&simple. is a design-driven architecture & interior design studio in Manly on Sydney's Northern Beaches, committed to craftsmanship, attention to detail and the inherent beauty of simplicity.",
-      },
-      { property: "og:title", content: "buck&simple. — Northern Beaches Architects" },
-      { property: "og:description", content: "Unique. Adaptive. Enduring. Bespoke residential architecture on Sydney's Northern Beaches." },
-      { property: "og:image", content: heroImg },
-    ],
-  }),
-  component: Index,
-});
+export default function Home() {
+  useSeo({
+    title: "buck&simple. — Northern Beaches Architects | Manly Architects",
+    description:
+      "buck&simple. is a design-driven architecture & interior design studio in Manly on Sydney's Northern Beaches, committed to craftsmanship, attention to detail and the inherent beauty of simplicity.",
+    ogTitle: "buck&simple. — Northern Beaches Architects",
+    ogDescription:
+      "Unique. Adaptive. Enduring. Bespoke residential architecture on Sydney's Northern Beaches.",
+    ogImage: heroImg,
+  });
 
-function Index() {
   const featured = projects.slice(0, 4);
   return (
     <SiteLayout>
-      {/* HERO */}
       <section className="relative h-screen min-h-[720px] w-full overflow-hidden">
         <img
           src={heroImg}
@@ -50,7 +43,6 @@ function Index() {
         </div>
       </section>
 
-      {/* INTRO */}
       <section className="container-editorial pt-32 pb-24 grid md:grid-cols-12 gap-12">
         <div className="md:col-span-3">
           <p className="eyebrow">— Practice</p>
@@ -73,7 +65,6 @@ function Index() {
         </div>
       </section>
 
-      {/* FEATURED WORK */}
       <section className="container-editorial pb-24">
         <div className="flex items-end justify-between mb-16">
           <div>
@@ -85,12 +76,7 @@ function Index() {
 
         <div className="space-y-32">
           {featured.map((p, i) => (
-            <Link
-              key={p.slug}
-              to="/work/$slug"
-              params={{ slug: p.slug }}
-              className="group block"
-            >
+            <Link key={p.slug} to={`/work/${p.slug}`} className="group block">
               <div className={`grid md:grid-cols-12 gap-8 items-end ${i % 2 === 1 ? "md:[direction:rtl]" : ""}`}>
                 <div className={`md:col-span-8 ${i % 2 === 1 ? "[direction:ltr]" : ""}`}>
                   <div className="overflow-hidden">
@@ -118,7 +104,6 @@ function Index() {
         </div>
       </section>
 
-      {/* PHILOSOPHY */}
       <section className="border-t border-border mt-12">
         <div className="container-editorial py-32 grid md:grid-cols-12 gap-12">
           <div className="md:col-span-3">
@@ -134,7 +119,6 @@ function Index() {
         </div>
       </section>
 
-      {/* CTA */}
       <section className="container-editorial py-32 text-center">
         <p className="eyebrow mb-8">— Commission</p>
         <h2 className="display-xl max-w-5xl mx-auto">

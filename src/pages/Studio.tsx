@@ -1,22 +1,7 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { Link } from "react-router-dom";
 import { SiteLayout } from "@/components/SiteLayout";
+import { useSeo } from "@/lib/useSeo";
 import studioImg from "@/assets/studio-interior.jpg";
-
-export const Route = createFileRoute("/studio")({
-  head: () => ({
-    meta: [
-      { title: "Studio — buck&simple. | Leading Luxury Residential Architects Northern Beaches" },
-      {
-        name: "description",
-        content:
-          "Established 2013 in Manly by directors Peter James Ahern & Kurt Crisp. A design-driven architecture studio focused on high-end residential architecture and interior design.",
-      },
-      { property: "og:title", content: "Studio — buck&simple." },
-      { property: "og:image", content: studioImg },
-    ],
-  }),
-  component: StudioPage,
-});
 
 const services = [
   "Full-service architectural design",
@@ -49,12 +34,18 @@ const people = [
 const faqs = [
   { q: "Why engage an Architect?", a: "A skilled Architect who understands construction, market realities and high-end design brings greater returns on investment — shortened build times, higher sale prices, and a higher-end product at more market-competitive pricing." },
   { q: "What types of projects does buck&simple specialise in?", a: "High-end residential architecture and interior design, particularly bespoke homes on complex or sloping sites. Our work is known for its design excellence, craftsmanship and enduring quality." },
-  { q: "Do you offer both architecture and interior design services?", a: "Yes. We offer full-service architectural design, joinery, and interior construction packages — a holistic approach that ensures cohesive, beautiful and functional spaces from concept to completion." },
-  { q: "Can you help with projects on difficult or sloping sites?", a: "Absolutely. We are experienced in working with steeply sloping and unique sites where maximising views and natural light is essential. These challenges are where we thrive." },
-  { q: "When should we engage an architect?", a: "The earlier, the better. Involving us at the beginning allows us to understand your needs, assess the site, and guide the design and planning process from the outset for the best possible outcome." },
+  { q: "Do you offer both architecture and interior design services?", a: "Yes. We offer full-service architectural design, joinery, and interior construction packages — yielding a higher quality building of enduring value as a result of considered, coordinated construction drawings." },
 ];
 
-function StudioPage() {
+export default function Studio() {
+  useSeo({
+    title: "Studio — buck&simple. | Leading Luxury Residential Architects Northern Beaches",
+    description:
+      "Established 2013 in Manly by directors Peter James Ahern & Kurt Crisp. A design-driven architecture studio focused on high-end residential architecture and interior design.",
+    ogTitle: "Studio — buck&simple.",
+    ogImage: studioImg,
+  });
+
   return (
     <SiteLayout>
       <section className="container-editorial pt-40 pb-20">
@@ -93,7 +84,6 @@ function StudioPage() {
         />
       </section>
 
-      {/* Services */}
       <section className="container-editorial py-32 grid md:grid-cols-12 gap-12">
         <div className="md:col-span-4">
           <p className="eyebrow mb-6">— Services</p>
@@ -118,7 +108,6 @@ function StudioPage() {
         </div>
       </section>
 
-      {/* People */}
       <section className="border-t border-border">
         <div className="container-editorial py-32">
           <div className="grid md:grid-cols-12 gap-12 mb-20">
@@ -143,7 +132,6 @@ function StudioPage() {
         </div>
       </section>
 
-      {/* FAQ */}
       <section className="border-t border-border">
         <div className="container-editorial py-32 grid md:grid-cols-12 gap-12">
           <div className="md:col-span-4">

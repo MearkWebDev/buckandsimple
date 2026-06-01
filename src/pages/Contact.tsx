@@ -1,19 +1,23 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { SiteLayout } from "@/components/SiteLayout";
 import { useState } from "react";
+import { SiteLayout } from "@/components/SiteLayout";
+import { useSeo } from "@/lib/useSeo";
 
-export const Route = createFileRoute("/contact")({
-  head: () => ({
-    meta: [
-      { title: "Contact — buck&simple. Architects" },
-      { name: "description", content: "If you have any questions or are interested in designing your new home, don't hesitate to reach out." },
-      { property: "og:title", content: "Contact — buck&simple." },
-    ],
-  }),
-  component: ContactPage,
-});
+function Field({ label, required, children }: { label: string; required?: boolean; children: React.ReactNode }) {
+  return (
+    <label className="block">
+      <span className="eyebrow block mb-2">{label}{required && " *"}</span>
+      {children}
+    </label>
+  );
+}
 
-function ContactPage() {
+export default function Contact() {
+  useSeo({
+    title: "Contact — buck&simple. Architects",
+    description: "If you have any questions or are interested in designing your new home, don't hesitate to reach out.",
+    ogTitle: "Contact — buck&simple.",
+  });
+
   const [submitted, setSubmitted] = useState(false);
   return (
     <SiteLayout>
@@ -46,18 +50,10 @@ function ContactPage() {
               onSubmit={(e) => { e.preventDefault(); setSubmitted(true); }}
               className="space-y-10 border-t border-border pt-10"
             >
-              <Field label="Full Name" required>
-                <input required type="text" className="form-input" />
-              </Field>
-              <Field label="Email" required>
-                <input required type="email" className="form-input" />
-              </Field>
-              <Field label="Phone Number">
-                <input type="tel" className="form-input" />
-              </Field>
-              <Field label="Message (optional)">
-                <textarea rows={5} className="form-input resize-none" />
-              </Field>
+              <Field label="Full Name" required><input required type="text" className="form-input" /></Field>
+              <Field label="Email" required><input required type="email" className="form-input" /></Field>
+              <Field label="Phone Number"><input type="tel" className="form-input" /></Field>
+              <Field label="Message (optional)"><textarea rows={5} className="form-input resize-none" /></Field>
               <Field label="Anticipated budget range">
                 <select className="form-input">
                   <option>$1M — $3M</option>
@@ -74,12 +70,7 @@ function ContactPage() {
                   <option>Other</option>
                 </select>
               </Field>
-              <button
-                type="submit"
-                className="nav-link link-underline pt-4"
-              >
-                Send Enquiry →
-              </button>
+              <button type="submit" className="nav-link link-underline pt-4">Send Enquiry →</button>
             </form>
           )}
           <style>{`
@@ -129,14 +120,5 @@ function ContactPage() {
         </aside>
       </section>
     </SiteLayout>
-  );
-}
-
-function Field({ label, required, children }: { label: string; required?: boolean; children: React.ReactNode }) {
-  return (
-    <label className="block">
-      <span className="eyebrow block mb-2">{label}{required && " *"}</span>
-      {children}
-    </label>
   );
 }

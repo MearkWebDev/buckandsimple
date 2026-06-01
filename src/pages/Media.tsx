@@ -1,16 +1,5 @@
-import { createFileRoute } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/SiteLayout";
-
-export const Route = createFileRoute("/media")({
-  head: () => ({
-    meta: [
-      { title: "Media & Awards — buck&simple." },
-      { name: "description", content: "Selected media features, editorials and awards." },
-      { property: "og:title", content: "Media & Awards — buck&simple." },
-    ],
-  }),
-  component: MediaPage,
-});
+import { useSeo } from "@/lib/useSeo";
 
 const press: { year: string; items: string[] }[] = [
   { year: "2025", items: [
@@ -47,7 +36,13 @@ const press: { year: string; items: string[] }[] = [
   { year: "2017", items: ["Sanctuary — Modern Green Homes Issue 41"] },
 ];
 
-function MediaPage() {
+export default function Media() {
+  useSeo({
+    title: "Media & Awards — buck&simple.",
+    description: "Selected media features, editorials and awards.",
+    ogTitle: "Media & Awards — buck&simple.",
+  });
+
   return (
     <SiteLayout>
       <section className="container-editorial pt-40 pb-20">

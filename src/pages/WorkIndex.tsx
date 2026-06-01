@@ -1,20 +1,16 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { Link } from "react-router-dom";
 import { SiteLayout } from "@/components/SiteLayout";
+import { useSeo } from "@/lib/useSeo";
 import { projects, additionalWork, archive, underConstruction } from "@/lib/projects";
 
-export const Route = createFileRoute("/work/")({
-  head: () => ({
-    meta: [
-      { title: "Work — buck&simple. Architects" },
-      { name: "description", content: "Selected residential architecture & interior design projects across Sydney, NSW, Victoria and Queensland." },
-      { property: "og:title", content: "Work — buck&simple." },
-      { property: "og:image", content: projects[0].image },
-    ],
-  }),
-  component: WorkIndex,
-});
+export default function WorkIndex() {
+  useSeo({
+    title: "Work — buck&simple. Architects",
+    description: "Selected residential architecture & interior design projects across Sydney, NSW, Victoria and Queensland.",
+    ogTitle: "Work — buck&simple.",
+    ogImage: projects[0].image,
+  });
 
-function WorkIndex() {
   return (
     <SiteLayout>
       <section className="container-editorial pt-40 pb-20">
@@ -24,14 +20,12 @@ function WorkIndex() {
         </h1>
       </section>
 
-      {/* Featured Grid */}
       <section className="container-editorial pb-24">
         <div className="grid md:grid-cols-2 gap-x-8 gap-y-24">
           {projects.map((p, i) => (
             <Link
               key={p.slug}
-              to="/work/$slug"
-              params={{ slug: p.slug }}
+              to={`/work/${p.slug}`}
               className={`group block ${i % 2 === 1 ? "md:mt-32" : ""}`}
             >
               <div className="overflow-hidden mb-6">
@@ -56,7 +50,6 @@ function WorkIndex() {
         </div>
       </section>
 
-      {/* Additional list */}
       <section className="container-editorial py-24 border-t border-border">
         <div className="grid md:grid-cols-12 gap-12">
           <div className="md:col-span-4">
@@ -74,7 +67,6 @@ function WorkIndex() {
         </div>
       </section>
 
-      {/* Under Construction */}
       <section className="container-editorial py-24 border-t border-border">
         <div className="grid md:grid-cols-12 gap-12">
           <div className="md:col-span-4">
@@ -92,7 +84,6 @@ function WorkIndex() {
         </div>
       </section>
 
-      {/* Archive */}
       <section className="container-editorial py-24 border-t border-border">
         <div className="grid md:grid-cols-12 gap-12">
           <div className="md:col-span-4">
