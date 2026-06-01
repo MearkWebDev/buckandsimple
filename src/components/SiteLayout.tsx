@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { type ReactNode, useEffect, useState } from "react";
+import { type ReactNode } from "react";
 
 const NAV = [
   { to: "/", label: "Index" },
@@ -9,23 +9,20 @@ const NAV = [
   { to: "/contact", label: "Contact" },
 ];
 
-export function SiteHeader() {
-  const [scrolled, setScrolled] = useState(false);
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 10);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+function BrandLogo() {
   return (
-    <header
-      className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${
-        scrolled ? "bg-background/85 backdrop-blur-md border-b border-border/60" : "bg-transparent"
-      }`}
-    >
+    <span className="font-display text-2xl font-medium tracking-tight leading-none">
+      buck<span className="font-normal italic">&amp;</span>simple<span className="text-foreground">.</span>
+    </span>
+  );
+}
+
+export function SiteHeader() {
+  return (
+    <header className="fixed top-0 inset-x-0 z-50 bg-[#FFFFFF] border-b border-[#EAEAEA]">
       <div className="container-editorial flex items-center justify-between h-20">
-        <Link to="/" className="font-display text-2xl font-medium tracking-tight leading-none">
-          buck<span className="font-normal italic">&amp;</span>simple<span className="text-foreground">.</span>
+        <Link to="/">
+          <BrandLogo />
         </Link>
         <nav className="hidden md:flex items-center gap-10">
           {NAV.map((n) => (
