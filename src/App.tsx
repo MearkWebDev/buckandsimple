@@ -14,7 +14,7 @@ const BASENAME = "/buckandsimple";
 
 export default function App() {
   return (
-    <BrowserRouter basename={BASENAME}>
+    <BrowserRouter basename="/buckandsimple">
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/studio" element={<Studio />} />
