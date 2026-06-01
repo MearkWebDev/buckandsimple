@@ -1,8 +1,8 @@
-import { Link } from "@tanstack/react-router";
-import { type ReactNode } from "react";
+import { Link, NavLink, useLocation } from "react-router-dom";
+import { useEffect, type ReactNode } from "react";
 
 const NAV = [
-  { to: "/", label: "Index" },
+  { to: "/", label: "Index", end: true },
   { to: "/studio", label: "Studio" },
   { to: "/work", label: "Work" },
   { to: "/media", label: "Media" },
@@ -26,15 +26,14 @@ export function SiteHeader() {
         </Link>
         <nav className="hidden md:flex items-center gap-10">
           {NAV.map((n) => (
-            <Link
+            <NavLink
               key={n.to}
               to={n.to}
-              className="nav-link"
-              activeProps={{ className: "nav-link active" }}
-              activeOptions={{ exact: n.to === "/" }}
+              end={n.end}
+              className={({ isActive }) => `nav-link${isActive ? " active" : ""}`}
             >
               {n.label}
-            </Link>
+            </NavLink>
           ))}
         </nav>
         <a href="mailto:info@buckandsimple.com" className="hidden md:inline nav-link link-underline">
@@ -89,9 +88,18 @@ export function SiteFooter() {
   );
 }
 
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  return null;
+}
+
 export function SiteLayout({ children }: { children: ReactNode }) {
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <ScrollToTop />
       <SiteHeader />
       <main>{children}</main>
       <SiteFooter />
