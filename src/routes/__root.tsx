@@ -5,11 +5,9 @@ import {
   createRootRouteWithContext,
   useRouter,
   HeadContent,
-  Scripts,
 } from "@tanstack/react-router";
-import { useEffect, type ReactNode } from "react";
+import { useEffect } from "react";
 
-import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 
 function NotFoundComponent() {
@@ -60,12 +58,12 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
           >
             Try again
           </button>
-          <a
-            href="/"
+          <Link
+            to="/"
             className="inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent"
           >
             Go home
-          </a>
+          </Link>
         </div>
       </div>
     </div>
@@ -77,52 +75,25 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Buck & Simple" },
-      { name: "description", content: "Buck & Simple" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Buck & Simple" },
-      { property: "og:description", content: "Buck & Simple" },
+      { title: "buck&simple. — Northern Beaches Architects" },
+      { name: "description", content: "Design-driven architecture & interior design studio in Manly on Sydney's Northern Beaches." },
+      { property: "og:title", content: "buck&simple." },
+      { property: "og:description", content: "Unique. Adaptive. Enduring." },
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
-      { name: "twitter:title", content: "Buck & Simple" },
-      { name: "twitter:description", content: "Buck & Simple" },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/91a89648-d24a-4b8f-ad8e-035d5a0dd7f2/id-preview-c9fc2dff--7ce9a1c4-0234-4f8c-84f7-931a125a46e5.lovable.app-1780299153457.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/91a89648-d24a-4b8f-ad8e-035d5a0dd7f2/id-preview-c9fc2dff--7ce9a1c4-0234-4f8c-84f7-931a125a46e5.lovable.app-1780299153457.png" },
-    ],
-    links: [
-      {
-        rel: "stylesheet",
-        href: appCss,
-      },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
-  shellComponent: RootShell,
   component: RootComponent,
   notFoundComponent: NotFoundComponent,
   errorComponent: ErrorComponent,
 });
-
-function RootShell({ children }: { children: ReactNode }) {
-  return (
-    <html lang="en">
-      <head>
-        <HeadContent />
-      </head>
-      <body>
-        {children}
-        <Scripts />
-      </body>
-    </html>
-  );
-}
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+      <HeadContent />
       <Outlet />
     </QueryClientProvider>
   );
