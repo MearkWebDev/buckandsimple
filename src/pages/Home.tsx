@@ -29,7 +29,7 @@ export default function Home() {
         <div className="absolute inset-0 bg-gradient-to-b from-black/35 via-black/10 to-black/50" />
         <div className="relative z-10 h-full container-editorial flex flex-col justify-end pb-24 text-[oklch(0.97_0.005_80)]">
           <p className="eyebrow text-[oklch(0.97_0.005_80)]/80 mb-6">Est. 2013 — Manly, Northern Beaches</p>
-          <h1 className="font-display font-light leading-[0.95] tracking-tight max-w-5xl text-[clamp(3rem,8vw,7rem)]">
+          <h1 className="font-display font-light leading-[0.95] tracking-tight max-w-5xl text-[clamp(3rem,8vw,7rem)] text-[#f8f6f6]">
             Unique. Adaptive.<br />
             <span className="italic font-light">Enduring.</span>
           </h1>
