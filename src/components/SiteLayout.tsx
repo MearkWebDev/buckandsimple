@@ -48,9 +48,11 @@ export function SiteHeader() {
 export function SiteFooter() {
   return (
     <footer className="mt-32 border-t border-border/70">
-      <div className="container-editorial py-20 grid gap-12 md:grid-cols-12">
+      <div className="container-editorial py-16 grid gap-12 md:grid-cols-12">
         <div className="md:col-span-5">
-          <p className="eyebrow mb-6">buck&amp;simple.</p>
+          <div className="mb-4">
+            <BrandLogo />
+          </div>
           <h3 className="font-display font-light text-3xl md:text-4xl leading-tight max-w-md">
             Architecture & interior design from Manly, on Sydney's Northern Beaches.
           </h3>
@@ -78,9 +80,9 @@ export function SiteFooter() {
         </div>
       </div>
       <div className="container-editorial pb-10 flex flex-col md:flex-row gap-4 items-start md:items-center justify-between border-t border-border/60 pt-6">
-        <p className="text-xs text-stone tracking-wide">© 2026 buck&amp;simple Architects & Interior Designers</p>
+        <p className="text-xs text-stone tracking-wide">&copy; 2026 buck&amp;simple Architects & Interior Designers</p>
         <p className="text-xs text-stone tracking-wide max-w-xl">
-          We acknowledge the 29 clans of the Eora Nation, the Traditional Owners of the land on which we work, live & play.
+          We acknowledge the 29 clans of the Eora Nation, the Traditional Owners of the land on which we work, live &amp; play.
         </p>
       </div>
     </footer>
