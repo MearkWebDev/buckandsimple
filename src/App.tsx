@@ -7,14 +7,14 @@ import Media from "@/pages/Media";
 import Contact from "@/pages/Contact";
 import NotFound from "@/pages/NotFound";
 
-// basename matches vite `base` for GitHub Pages deployment at /buckandsimple/.
+// Match Vite's base: root in the live preview, /buckandsimple/ on GitHub Pages.
 // To migrate to TanStack Start SSR later, replace this file with route-tree
 // definitions under src/routes/ — page components in src/pages/ stay as-is.
-const BASENAME = "/buckandsimple";
+const BASENAME = import.meta.env.BASE_URL;
 
 export default function App() {
   return (
-    <BrowserRouter basename="/buckandsimple">
+    <BrowserRouter basename={BASENAME}>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/studio" element={<Studio />} />

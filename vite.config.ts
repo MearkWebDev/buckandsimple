@@ -4,12 +4,12 @@ import tailwindcss from "@tailwindcss/vite";
 import tsconfigPaths from "vite-tsconfig-paths";
 
 // Base path for GitHub Pages deployment at https://<user>.github.io/buckandsimple/
-export default defineConfig({
-  base: "/buckandsimple/",
+export default defineConfig(({ command }) => ({
+  base: command === "build" ? "/buckandsimple/" : "/",
   plugins: [react(), tailwindcss(), tsconfigPaths()],
   server: {
     host: "::",
     port: 8080,
     strictPort: false,
   },
-});
+}));
